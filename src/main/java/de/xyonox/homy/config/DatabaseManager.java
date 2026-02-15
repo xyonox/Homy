@@ -16,9 +16,12 @@ public class DatabaseManager {
     public static void init(String url, String username,String password) throws Exception {
         connectionSource = new JdbcConnectionSource(
                 url, username, password);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(DatabaseManager::shutdown));
     }
 
     public static void init() throws Exception {
+        // TODO: .env
         init(DATABASE_URL, "homy", "qwertzuikmjLOeAe1");
 
         TableUtils.createTableIfNotExists(connectionSource, User.class);
@@ -26,5 +29,15 @@ public class DatabaseManager {
 
     public static ConnectionSource getConnection() {
         return connectionSource;
+    }
+
+    public static void shutdown() {
+        try {
+            if (connectionSource != null) {
+                connectionSource.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
