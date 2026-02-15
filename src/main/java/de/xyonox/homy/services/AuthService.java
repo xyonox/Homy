@@ -90,7 +90,7 @@ public class AuthService {
         if (token == null)
             return Optional.empty();
 
-        LocalDateTime expiresAt = token.getCreatedAt().plusDays(TOKEN_VALID_DAYS);
+        LocalDateTime expiresAt = token.getCreatedAtLocalDateTime().plusDays(TOKEN_VALID_DAYS);
         if (LocalDateTime.now().isAfter(expiresAt)) {
             tokenRepo.delete(token);
             return Optional.empty();

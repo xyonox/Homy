@@ -9,7 +9,7 @@ import de.xyonox.homy.model.*;
 public class DatabaseManager {
 
     private static final String DATABASE_URL =
-            "jdbc:postgresql://localhost:5432/homy";
+            "jdbc:mysql://localhost:3306/homy";
 
     private static ConnectionSource connectionSource;
 
@@ -22,7 +22,7 @@ public class DatabaseManager {
 
     public static void init() throws Exception {
         // TODO: .env
-        init(DATABASE_URL, "homy", "qwertzuikmjLOeAe1");
+        init(DATABASE_URL, "root", "MeinSicheresPW123!");
 
         TableUtils.createTableIfNotExists(connectionSource, User.class);
     }

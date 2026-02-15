@@ -1,11 +1,14 @@
 package de.xyonox.homy.model;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @DatabaseTable(tableName = "tokens")
 @Data
@@ -18,8 +21,8 @@ public class Token {
     @DatabaseField(columnName = "hash_token", canBeNull = false, index = true, unique = true)
     private String hashToken;
 
-    @DatabaseField(canBeNull = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @DatabaseField(dataType = DataType.DATE_STRING, format = "yyyy-MM-dd HH:mm", canBeNull = false)
+    private Date createdAt = new Date();
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true, canBeNull = false)
     private User user;
@@ -27,6 +30,19 @@ public class Token {
     public Token(String hashToken, User user) {
         this.hashToken = hashToken;
         this.user = user;
-        this.createdAt = LocalDateTime.now();
+        setCreatedAt(LocalDateTime.now());
+    }
+
+    public LocalDateTime getCreatedAtLocalDateTime() {
+        return LocalDateTime.ofInstant(createdAt.toInstant(), ZoneId.systemDefault());
+    }
+
+    public void setCreatedAt(LocalDateTime value) {
+        if (value == null) throw new IllegalArgumentException("createdAt must not be null");
+        this.createdAt = Date.from(value.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public void setCreatedAtNow() {
+        setCreatedAt(LocalDateTime.now());
     }
 }
