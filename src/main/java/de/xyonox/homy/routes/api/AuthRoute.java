@@ -58,4 +58,25 @@ public class AuthRoute implements RequestHandler {
             throw new RuntimeException(e);
         }
     }
+
+    @Route("/register")
+    @RequestMethod(HttpMethod.POST)
+    @RequireBody(JsonBody.class)
+    public void register(Exchange exchange) {
+        Request request = exchange.request();
+        Response response = exchange.response();
+        Json body = request.getBody().getAsJsonBody().getBody();
+
+        Json answer = Json.empty();
+
+        if (!body.contains("username") || !body.contains("password")){
+            response.setCode(400);
+            response.print(answer
+                    .set("error", "Missing username or password")
+                    .set("code", 400)
+            );
+            return;
+        }
+
+    }
 }
