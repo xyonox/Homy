@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+group = 'de.xyonox'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        name "craftsblockReleases"
+        url "https://repo.craftsblock.de/releases"
+    }
+}
+
+dependencies {
+
+    // Lombok
+    implementation 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
+
+    //Database stuff
+    implementation 'com.j256.ormlite:ormlite-jdbc:6.1'
+    implementation "com.mysql:mysql-connector-j:8.2.0"
+
+    // Backend
+    implementation "de.craftsblock:craftsnet:3.6.0"
+    implementation platform("de.craftsblock.craftscore:bom:3.8.12")
+    implementation "de.craftsblock.craftscore:event"
+    implementation "de.craftsblock.craftscore:json"
+    implementation 'org.mindrot:jbcrypt:0.4'
+
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
