@@ -36,6 +36,9 @@ public class AuthService {
         if (userRepo.findByUsername(username) != null)
             return Optional.empty();
 
+        if (userRepo.findByEmail(email) != null)
+            return Optional.empty();
+
         String hash = BCrypt.hashpw(password, BCrypt.gensalt());
 
         User user = new User();

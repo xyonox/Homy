@@ -27,6 +27,13 @@ public class UserRepository {
                 .queryForFirst();
     }
 
+    public User findByEmail(String email) throws Exception {
+        return dao.queryBuilder()
+                .where()
+                .eq("email", email)
+                .queryForFirst();
+    }
+
     public User findById(int id) throws Exception {
         return dao.queryForId(id);
     }
