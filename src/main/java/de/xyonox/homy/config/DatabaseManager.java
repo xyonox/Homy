@@ -25,6 +25,7 @@ public class DatabaseManager {
         init(DATABASE_URL, "root", "MeinSicheresPW123!");
 
         TableUtils.createTableIfNotExists(connectionSource, User.class);
+        TableUtils.createTableIfNotExists(connectionSource, Token.class);
     }
 
     public static ConnectionSource getConnection() {
