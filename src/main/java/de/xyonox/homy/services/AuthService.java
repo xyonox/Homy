@@ -1,4 +1,4 @@
-package de.xyonox.homy.services.authorization;
+package de.xyonox.homy.services;
 
 import de.xyonox.homy.model.Token;
 import de.xyonox.homy.model.User;
