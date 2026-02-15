@@ -26,8 +26,12 @@ public class PreRequestListener implements ListenerAdapter {
         Request request = exchange.request();
         Response response = exchange.response();
 
-        // String path = request.getUrl();
+        String path = request.getUrl();
         // TODO: Routen auch ohne Auth oder nur ohne auth erreichbar (regex)
+
+        if (path.contains("login") || path.contains("register")) {
+            return;
+        }
 
         if (!request.getCookies().containsKey(TOKEN_COOKIE)) {
             // Falls möglich: echten HTTP-Status setzen (API abhängig)

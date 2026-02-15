@@ -18,7 +18,7 @@ public class Token {
     @DatabaseField(generatedId = true)
     private int id;
 
-    @DatabaseField(columnName = "hash_token", canBeNull = false, index = true, unique = true)
+    @DatabaseField(columnName = "hash_token", canBeNull = false, unique = true)
     private String hashToken;
 
     @DatabaseField(dataType = DataType.DATE_STRING, format = "yyyy-MM-dd HH:mm", canBeNull = false)
