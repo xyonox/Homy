@@ -26,7 +26,7 @@ public class User {
     private String passwordHash;
 
     @DatabaseField
-    private String role; // e.g. "USER","ADMIN"
+    private String role = "USER";
 
     @DatabaseField
     private long createdAt;

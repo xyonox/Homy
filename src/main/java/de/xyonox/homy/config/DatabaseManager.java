@@ -26,6 +26,7 @@ public class DatabaseManager {
 
         TableUtils.createTableIfNotExists(connectionSource, User.class);
         TableUtils.createTableIfNotExists(connectionSource, Token.class);
+        TableUtils.createTableIfNotExists(connectionSource, Video.class);
     }
 
     public static ConnectionSource getConnection() {
